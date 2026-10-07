@@ -8,6 +8,8 @@ Uma aplicação web completa e moderna para calcular o **Índice de Massa Corpor
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white)
 
+<img width="1915" height="945" alt="image" src="https://github.com/user-attachments/assets/de2fadb4-0ff1-415f-a2f1-f906547709da" />
+
 ---
 
 ## 📑 Índice
