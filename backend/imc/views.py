@@ -8,7 +8,7 @@ from .serializers import CalcularIMCSerializer, CalculoIMCSerializer
 @api_view(['POST'])
 def calcular_imc(request):
     """
-    Calcula o IMC com base no peso e altura fornecidos.
+    Calcula o IMC com base no peso e altura fornecidos.'
     Salva o resultado no banco de dados.
     """
     serializer = CalcularIMCSerializer(data=request.data)
