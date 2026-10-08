@@ -1,12 +1,14 @@
 # 🏋️ Calculadora de IMC — Índice de Massa Corporal
 
-Uma aplicação web completa e moderna para calcular o **Índice de Massa Corporal (IMC)**, desenvolvida com **Django REST Framework** no backend e **Vue.js 3 + Tailwind CSS** no frontend.
+Uma aplicação web para calcular o **Índice de Massa Corporal (IMC)**, desenvolvida com **Django REST Framework** no backend e **Vue.js 3 + Tailwind CSS** no frontend.
 
 ![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-6.1-092E20?logo=django&logoColor=white)
 ![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?logo=vue.js&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white)
+
+<img width="1915" height="945" alt="image" src="https://github.com/user-attachments/assets/de2fadb4-0ff1-415f-a2f1-f906547709da" />
 
 ---
 
@@ -28,7 +30,7 @@ Uma aplicação web completa e moderna para calcular o **Índice de Massa Corpor
 
 ## 📖 Sobre o Projeto
 
-O **IMC (Índice de Massa Corporal)** é uma medida internacionalmente utilizada para avaliar se uma pessoa está dentro do peso ideal com base na relação entre peso e altura. A fórmula é:
+O **IMC (Índice de Massa Corporal)** é uma medida utilizada para avaliar se uma pessoa está dentro do peso ideal com base na relação entre peso e altura. A fórmula é:
 
 ```
 IMC = Peso (kg) ÷ Altura² (m)
@@ -36,11 +38,9 @@ IMC = Peso (kg) ÷ Altura² (m)
 
 Esta aplicação permite que o usuário:
 - Insira seu peso (em kg) e altura (em metros)
-- Receba instantaneamente o valor do IMC calculado
+- Receba o valor do IMC calculado
 - Visualize a classificação segundo a OMS (Organização Mundial da Saúde)
 - Consulte um histórico com os últimos 10 cálculos realizados
-
-A interface foi desenvolvida com foco em **design premium**, utilizando efeitos de glassmorphism, gradientes animados e micro-animações para proporcionar uma experiência visual moderna e agradável.
 
 ---
 
@@ -48,7 +48,7 @@ A interface foi desenvolvida com foco em **design premium**, utilizando efeitos 
 
 | Funcionalidade | Descrição |
 |---|---|
-| **Cálculo de IMC** | Insira peso e altura para obter o IMC instantaneamente |
+| **Cálculo de IMC** | Insira peso e altura para obter o IMC |
 | **Classificação automática** | O resultado é classificado de "Abaixo do peso" a "Obesidade Grau III" |
 | **Barra gauge visual** | Um indicador visual mostra onde seu IMC se posiciona na escala |
 | **Tabela de referência** | Todas as 6 classificações do IMC com seus respectivos intervalos |
@@ -68,25 +68,10 @@ A interface foi desenvolvida com foco em **design premium**, utilizando efeitos 
 | Tecnologia | Versão | Função |
 |---|---|---|
 | **Python** | 3.14 | Linguagem de programação principal do backend |
-| **Django** | 6.1 | Framework web de alto nível para Python. Gerencia o servidor, rotas, ORM (mapeamento objeto-relacional) e migrações do banco de dados |
+| **Django** | 6.1 | Framework web para Python. Gerencia o servidor, rotas, ORM (mapeamento objeto-relacional) e migrações do banco de dados |
 | **Django REST Framework (DRF)** | 3.18 | Extensão do Django para criar APIs RESTful. Fornece serializers, validação de dados, e respostas em JSON |
 | **django-cors-headers** | 4.9 | Middleware que permite requisições cross-origin (CORS), necessário para que o frontend (porta 5173) se comunique com o backend (porta 8000) |
 | **SQLite** | — | Banco de dados leve embutido no Python. Armazena o histórico de cálculos sem necessidade de instalar um servidor de banco |
-
-#### O que cada pacote faz:
-
-- **Django**: É o "coração" do backend. Ele cuida de:
-  - **ORM**: Permite definir modelos de dados em Python que são automaticamente convertidos em tabelas no banco de dados
-  - **Migrações**: Sistema que aplica as mudanças nos modelos ao banco de dados de forma controlada
-  - **URLs**: Mapeia as rotas HTTP (ex: `/api/imc/calcular/`) para as funções que processam as requisições
-  - **Admin**: Painel administrativo automático (acessível em `/admin/`)
-
-- **Django REST Framework**: Adiciona ao Django:
-  - **Serializers**: Convertem objetos Python em JSON (e vice-versa), com validação automática de tipos, valores mínimos/máximos, etc.
-  - **API Views**: Decoradores como `@api_view` que simplificam a criação de endpoints REST
-  - **Response**: Objeto de resposta HTTP com suporte nativo a JSON
-
-- **django-cors-headers**: Sem ele, o navegador bloqueia as requisições do frontend (`localhost:5173`) para o backend (`localhost:8000`) por serem de origens diferentes — uma medida de segurança dos navegadores chamada CORS (Cross-Origin Resource Sharing)
 
 ---
 
@@ -99,29 +84,6 @@ A interface foi desenvolvida com foco em **design premium**, utilizando efeitos 
 | **Tailwind CSS** | 4.0 | Framework CSS utilitário. Permite estilizar elementos diretamente no HTML usando classes como `bg-slate-900`, `rounded-2xl`, `hover:bg-indigo-500` |
 | **Axios** | — | Cliente HTTP para JavaScript. Faz as requisições (GET, POST, DELETE) para a API do backend |
 | **TypeScript** | — | Superset de JavaScript que adiciona tipagem estática, ajudando a prevenir erros em tempo de desenvolvimento |
-
-#### O que cada ferramenta faz:
-
-- **Vue.js 3**: Framework reativo que permite:
-  - **Composition API (`<script setup>`)**: Sintaxe moderna para organizar a lógica dos componentes usando `ref()`, `computed()`, `onMounted()`
-  - **Reatividade**: Quando um dado muda (ex: resultado do IMC), a interface atualiza automaticamente
-  - **Componentes SFC**: Cada arquivo `.vue` contém template (HTML), script (JS/TS) e estilos (CSS) em um único arquivo
-  - **Transições**: Sistema de animações nativo com `<Transition>` para entradas/saídas suaves de elementos
-
-- **Vite**: Dev server que:
-  - Inicia em milissegundos (vs segundos do webpack)
-  - Atualiza a página instantaneamente quando você edita um arquivo (HMR)
-  - Faz o build otimizado para produção com tree-shaking
-
-- **Tailwind CSS 4**: Sistema de estilização que:
-  - Elimina a necessidade de escrever CSS separado para cada componente
-  - Oferece classes utilitárias para cores, espaçamento, bordas, sombras, animações, responsividade, etc.
-  - Na v4, usa `@import "tailwindcss"` e o plugin `@tailwindcss/vite` — sem necessidade de arquivo de configuração
-
-- **Axios**: Biblioteca HTTP que:
-  - Simplifica requisições AJAX com sintaxe baseada em Promises/async-await
-  - Lida automaticamente com serialização JSON
-  - Fornece tratamento de erros detalhado com `response.data`
 
 ---
 
@@ -237,11 +199,7 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 
 ## 🚀 Instalação e Configuração
 
-### 1. Clone ou acesse o projeto
-
-```bash
-cd "c:\Users\LazyLopes\Desktop\Arquivos\Code\Nova pasta"
-```
+### 1. Clone o projeto
 
 ### 2. Configure o Backend (Django)
 
@@ -497,7 +455,3 @@ Componente principal (≈400 linhas) com:
 - Remoção das setas nativas de `input[type="number"]`
 
 ---
-
-## 📝 Licença
-
-Este projeto foi desenvolvido para fins educacionais e de estudo.
