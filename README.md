@@ -8,7 +8,7 @@ Uma aplicação web para calcular o **Índice de Massa Corporal (IMC)**, desenvo
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white)
 
-<img width="1915" height="945" alt="image" src="https://github.com/user-attachments/assets/de2fadb4-0ff1-415f-a2f1-f906547709da" />
+<img width="1919" height="942" alt="image" src="https://github.com/user-attachments/assets/9460c4fa-a993-468c-b3b1-6318069f66d3" />
 
 ---
 
