@@ -34,10 +34,6 @@ import ImcCalculator from './components/ImcCalculator.vue'
       <!-- Calculator -->
       <ImcCalculator />
 
-      <!-- Footer -->
-      <footer class="mt-12 text-center text-slate-500 text-sm">
-        <p>Desenvolvido com <span class="text-red-400">♥</span> usando Django + Vue.js</p>
-      </footer>
     </div>
   </div>
 </template>
