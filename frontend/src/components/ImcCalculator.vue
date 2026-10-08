@@ -7,6 +7,7 @@ const API_URL = 'http://localhost:8000/api/imc'
 // Form data
 const peso = ref<number | null>(null)
 const altura = ref<number | null>(null)
+const alturaDisplay = ref('')
 
 // State
 const loading = ref(false)
@@ -34,9 +35,11 @@ const gaugePosition = computed(() => {
   return ((clamped - 10) / 40) * 100
 })
 
+const defaultCor = classificacaoCores['Peso normal']!
+
 const corResultado = computed(() => {
-  if (!resultado.value) return classificacaoCores['Peso normal']
-  return classificacaoCores[resultado.value.classificacao] || classificacaoCores['Peso normal']
+  if (!resultado.value) return defaultCor
+  return classificacaoCores[resultado.value.classificacao] ?? defaultCor
 })
 
 async function calcular() {
@@ -96,9 +99,67 @@ async function limparHistorico() {
   }
 }
 
+function onAlturaInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  let raw = target.value
+
+  if (!raw) {
+    altura.value = null
+    alturaDisplay.value = ''
+    return
+  }
+
+  let valClean = raw.replace(',', '.')
+
+  if (!raw.includes('.') && !raw.includes(',')) {
+    const digitsOnly = raw.replace(/\D/g, '')
+    const num = parseInt(digitsOnly, 10)
+
+    if (!isNaN(num)) {
+      if (num >= 30) {
+        const formatted = (num / 100).toFixed(2)
+        altura.value = parseFloat(formatted)
+        alturaDisplay.value = formatted
+        return
+      } else {
+        altura.value = num
+        alturaDisplay.value = digitsOnly
+        return
+      }
+    } else {
+      altura.value = null
+      alturaDisplay.value = ''
+      return
+    }
+  }
+
+  const parsed = parseFloat(valClean)
+  if (!isNaN(parsed)) {
+    altura.value = parsed
+  } else {
+    altura.value = null
+  }
+
+  alturaDisplay.value = raw
+}
+
+function onAlturaBlur() {
+  if (altura.value !== null && !isNaN(altura.value)) {
+    if (altura.value >= 3 && altura.value < 30) {
+      altura.value = parseFloat((altura.value / 10).toFixed(2))
+    } else if (altura.value >= 30 && altura.value <= 300) {
+      altura.value = parseFloat((altura.value / 100).toFixed(2))
+    }
+    if (altura.value >= 0.3 && altura.value <= 3.0) {
+      alturaDisplay.value = altura.value.toFixed(2)
+    }
+  }
+}
+
 function resetar() {
   peso.value = null
   altura.value = null
+  alturaDisplay.value = ''
   resultado.value = null
   erro.value = ''
 }
@@ -167,11 +228,11 @@ onMounted(() => {
             <div class="relative">
               <input
                 id="altura-input"
-                v-model.number="altura"
-                type="number"
-                step="0.01"
-                min="0.3"
-                max="3.0"
+                v-model="alturaDisplay"
+                @input="onAlturaInput"
+                @blur="onAlturaBlur"
+                type="text"
+                inputmode="decimal"
                 placeholder="1.75"
                 class="w-full px-5 py-4 bg-slate-800/60 border border-white/10 rounded-2xl text-white text-lg placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 hover:border-white/20"
                 @keyup.enter="calcular"
