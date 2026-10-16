@@ -100,8 +100,7 @@ async function limparHistorico() {
 }
 
 function onAlturaInput(e: Event) {
-  const target = e.target as HTMLInputElement
-  let raw = target.value
+  const raw = (e.target as HTMLInputElement).value
 
   if (!raw) {
     altura.value = null
@@ -109,37 +108,27 @@ function onAlturaInput(e: Event) {
     return
   }
 
-  let valClean = raw.replace(',', '.')
-
+  // Se não tem ponto nem vírgula, tenta interpretar como centímetros
   if (!raw.includes('.') && !raw.includes(',')) {
-    const digitsOnly = raw.replace(/\D/g, '')
-    const num = parseInt(digitsOnly, 10)
-
-    if (!isNaN(num)) {
-      if (num >= 30) {
-        const formatted = (num / 100).toFixed(2)
-        altura.value = parseFloat(formatted)
-        alturaDisplay.value = formatted
-        return
-      } else {
-        altura.value = num
-        alturaDisplay.value = digitsOnly
-        return
-      }
-    } else {
+    const num = parseInt(raw.replace(/\D/g, ''), 10)
+    if (isNaN(num)) {
       altura.value = null
       alturaDisplay.value = ''
       return
     }
+    if (num >= 30) {
+      const formatted = (num / 100).toFixed(2)
+      altura.value = parseFloat(formatted)
+      alturaDisplay.value = formatted
+    } else {
+      altura.value = num
+      alturaDisplay.value = raw.replace(/\D/g, '')
+    }
+    return
   }
 
-  const parsed = parseFloat(valClean)
-  if (!isNaN(parsed)) {
-    altura.value = parsed
-  } else {
-    altura.value = null
-  }
-
+  const parsed = parseFloat(raw.replace(',', '.'))
+  altura.value = isNaN(parsed) ? null : parsed
   alturaDisplay.value = raw
 }
 

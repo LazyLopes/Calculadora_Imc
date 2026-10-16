@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import ImcCalculator from './components/ImcCalculator.vue'
 </script>
 

@@ -1,2 +1,1 @@
-from django.test import TestCase
-
+# tests.py - Testes a serem implementados
