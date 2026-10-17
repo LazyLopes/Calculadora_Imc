@@ -103,22 +103,22 @@ Esta aplicação permite que o usuário:
 A aplicação segue uma arquitetura **cliente-servidor desacoplada**:
 
 ```
-┌─────────────────────┐         HTTP/JSON         ┌──────────────────────┐
+┌─────────────────────┐         HTTP/JSON          ┌──────────────────────┐
 │                     │  ◄──────────────────────►  │                      │
 │   Frontend (Vue.js) │    POST /api/imc/calcular/ │   Backend (Django)   │
-│   localhost:5173     │    GET  /api/imc/historico/│   localhost:8000     │
-│                     │    DELETE /api/imc/...      │                      │
-│   - Interface UI    │                            │   - API REST          │
-│   - Tailwind CSS    │                            │   - Lógica de cálculo │
-│   - Axios (HTTP)    │                            │   - Banco de dados    │
+│   localhost:5173    │    GET  /api/imc/historico/│   localhost:8000     │
+│                     │    DELETE /api/imc/...     │                      │
+│   - Interface UI    │                            │   - API REST         │
+│   - Tailwind CSS    │                            │   - Lógica de cálculo│
+│   - Axios (HTTP)    │                            │   - Banco de dados   │
 │                     │                            │                      │
 └─────────────────────┘                            └──────────────────────┘
-                                                          │
-                                                          ▼
-                                                   ┌──────────────┐
-                                                   │   SQLite     │
-                                                   │  (db.sqlite3)│
-                                                   └──────────────┘
+                                                              │
+                                                              ▼
+                                                      ┌──────────────┐
+                                                      │   SQLite     │
+                                                      │  (db.sqlite3)│
+                                                      └──────────────┘
 ```
 
 ### Fluxo de uma requisição:
